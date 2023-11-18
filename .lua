@@ -13,11 +13,71 @@ Icon = "rbxassetid://",
 PremiumOnly = false
 })
 
+local T3 = Window:MakeTab({
+Name = "Teleport",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
 local egg = {}
 local zone = {}
+local World = {"Earth","Space"}
+local TotalZone = {}
 
 OrionLib:AddTable(game:GetService("ReplicatedStorage")["Assets"]["Eggs"],egg)
 OrionLib:AddTable(workspace["Islands"],zone)
+
+for i = 1,#zone do
+      OrionLib:AddTable(i,TotalZone)
+end
+
+local function TPIsland(wo,nmbr,islnd)
+game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["MapService"]["RF"]["RequestTeleport"]:InvokeServer(wo,nmbr)
+game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["MapService"]["RF"]["SetIsland"]:InvokeServer(islnd)
+game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["GetCurrentWorldMultiplier"]:InvokeServer()
+end
+
+T3:AddDropdown({
+  Name = "Select World",
+  Default = World[1],
+  Options = World,
+  Callback = function(Value)
+   _G.w = Value
+  end    
+})
+
+T3:AddDropdown({
+  Name = "Select Island",
+  Default = zone[1],
+  Options = zone,
+  Callback = function(Value)
+   _G.i = Value
+  end    
+})
+
+T3:AddDropdown({
+  Name = "Select Island",
+  Default = TotalZone[1],
+  Options = TotalZone,
+  Callback = function(Value)
+   _G.tz = Value
+  end    
+})
+
+T3:AddButton({
+  Name = "Teleport To Selected Island [Number]",
+  Callback = function()
+      game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["MapService"]["RF"]["RequestTeleport"]:InvokeServer(_G.w,_G.tz)
+  end    
+})
+
+T3:AddButton({
+  Name = "Set Selected Island [Island]",
+  Callback = function()
+      game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["MapService"]["RF"]["SetIsland"]:InvokeServer(_G.i)
+      game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["GetCurrentWorldMultiplier"]:InvokeServer()
+  end    
+})
 
 T1:AddToggle({
 Name = "Click",
