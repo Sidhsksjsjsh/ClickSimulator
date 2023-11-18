@@ -56,7 +56,7 @@ T3:AddDropdown({
 })
 
 T3:AddDropdown({
-  Name = "Select Island",
+  Name = "Select Number",
   Default = TotalZone[1],
   Options = TotalZone,
   Callback = function(Value)
