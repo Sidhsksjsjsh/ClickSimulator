@@ -100,6 +100,7 @@ T3:AddButton({
       NumberSelector:Set(TotalZone[1])
    end
 })
+
 T1:AddToggle({
 Name = "Click",
 Default = false,
@@ -107,6 +108,15 @@ Callback = function(Value)
 _G.Click = Value
       while wait() do
         if _G.Click == false then break end
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
+        game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
         game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["ClickService"]["RF"]["Click"]:InvokeServer()
       end
 end    
@@ -176,6 +186,20 @@ _G.ht = Value
       while wait() do
         if _G.ht == false then break end
         game:GetService("ReplicatedStorage")["Packages"]["Knit"]["Services"]["EggService"]["RF"]["OpenEgg"]:InvokeServer(_G.EggName,"Single")
+      end
+end    
+})
+
+T2:AddToggle({
+Name = "Remove Hatch Animation",
+Default = false,
+Callback = function(Value)
+_G.htc_a = Value
+      while wait() do
+        if _G.htc_a == false then break end
+        for _,v in pairs(workspace.CurrentCamera:GetChildren()) do
+                  v:Destroy()
+            end
       end
 end    
 })
