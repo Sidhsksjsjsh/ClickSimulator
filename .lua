@@ -27,8 +27,12 @@ local TotalZone = {}
 OrionLib:AddTable(game:GetService("ReplicatedStorage")["Assets"]["Eggs"],egg)
 OrionLib:AddTable(workspace["Islands"],zone)
 
+local function AddNumberToTheTable()
+task.spawn(function()
 for i = 1,#zone do
       OrionLib:AddTable(i,TotalZone)
+end
+end)
 end
 
 local function TPIsland(wo,nmbr,islnd)
@@ -46,7 +50,7 @@ T3:AddDropdown({
   end    
 })
 
-T3:AddDropdown({
+local IslandSelector = T3:AddDropdown({
   Name = "Select Island",
   Default = zone[1],
   Options = zone,
@@ -55,7 +59,7 @@ T3:AddDropdown({
   end    
 })
 
-T3:AddDropdown({
+local NumberSelector = T3:AddDropdown({
   Name = "Select Number",
   Default = TotalZone[1],
   Options = TotalZone,
@@ -79,6 +83,23 @@ T3:AddButton({
   end    
 })
 
+T3:AddButton({
+   Name = "Refresh Selection",
+   Callback = function()
+      zone = {}
+      TotalZone = {}
+      IslandSelector:Refresh({"Refreshing.."},true)
+      NumberSelector:Refresh({"Refreshing.."},true)
+      wait(0.1)
+      OrionLib:AddTable(workspace["Islands"],zone)
+      AddNumberToTheTable()
+      wait(0.1)
+      IslandSelector:Refresh(zone,true)
+      NumberSelector:Refresh(TotalZone,true)
+      IslandSelector:Set(zone[1])
+      NumberSelector:Set(TotalZone[1])
+   end
+})
 T1:AddToggle({
 Name = "Click",
 Default = false,
